@@ -9,7 +9,7 @@ for filename in files:
     if 'txt' not in filename:
         continue
     with open(filename) as f:
-        trackers[filename.strip('.txt')]=[x.strip("\n").strip("\\n") for x in f.readlines()]
+        trackers[filename.split('.')[0]]=[x.strip("\n").strip("\\n") for x in f.readlines()]
 
 def backtrace(parent, start, end):
     path = [end]
@@ -40,6 +40,6 @@ def path(graph, start, end):
             print(n)
 
 for x in trackers.keys():
-    lel = path(trackers, str(x), 'HDBits')
+    lel = path(trackers, str(x), 'AnimeBytes')
     if lel != None : print(lel)#change this to search for a particular path
 
