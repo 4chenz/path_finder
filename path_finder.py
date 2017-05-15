@@ -3,13 +3,13 @@
 ## All filenames should be named the tracker and the same as in the lists.
 ## All tracker names should be the same across files.
 import os
-files = [f.lower() for f in os.listdir('.') if os.path.isfile(f)]
+files = [f for f in os.listdir('.') if os.path.isfile(f)]
 trackers = {}
 for filename in files:
     if 'txt' not in filename:
         continue        
     with open(filename) as f:
-        trackers[filename.split('.')[0]]=[x.lower() for x in f.read().splitlines()]
+        trackers[filename.split('.')[0].lower()]=[x.lower() for x in f.read().splitlines()]
 
 def backtrace(parent, start, end):
     _path = [end]
