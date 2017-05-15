@@ -24,7 +24,7 @@ Kraytracker
 UHDBits
 HD-Space
 ExtremeBits
-The Horror Channel
+TheHorrorChannel
 HD-MKV
 Cryptichaven Comedy Club
 GazelleGames

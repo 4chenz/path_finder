@@ -3,32 +3,39 @@
 ## All filenames should be named the tracker and the same as in the lists.
 ## All tracker names should be the same across files.
 import os
-files = [f for f in os.listdir('.') if os.path.isfile(f)]
+files = [f.lower() for f in os.listdir('.') if os.path.isfile(f)]
 trackers = {}
 for filename in files:
     if 'txt' not in filename:
-        continue
+        continue        
     with open(filename) as f:
-        trackers[filename.split('.')[0]]=[x.strip("\n").strip("\\n") for x in f.readlines()]
+        trackers[filename.split('.')[0]]=[x.lower() for x in f.read().splitlines()]
 
 def backtrace(parent, start, end):
-    path = [end]
-    while path[-1] != start:
-        path.append(parent[path[-1]])
-    path.reverse()
-    return path
+    _path = [end]
+    while _path[-1] != start:
+        _path.append(parent[_path[-1]])
+    _path.reverse()
+    return _path
 
 def bfs(graph, start, end):
     parent = {}
+    visited = {}
     queue = []
     queue.append(start)
+    for node in trackers.keys():
+        visited[node]=False
+        for x in trackers[node]:
+            visited[x]=False
     while queue:
         node = queue.pop(0)
         if node == end:
             return backtrace(parent, start, end)
         for adjacent in graph.get(node, []):
-            parent[adjacent] = node
-            queue.append(adjacent)
+            if visited[adjacent] == False:
+                visited[adjacent] = True
+                parent[adjacent] = node
+                queue.append(adjacent)
 
 def path(graph, start, end):
     x = bfs(graph, start, end)
@@ -38,8 +45,8 @@ def path(graph, start, end):
                 print(n,end=" -> ")
                 continue
             print(n)
-
-for x in trackers.keys():
-    lel = path(trackers, str(x), 'AnimeBytes')
-    if lel != None : print(lel)#change this to search for a particular path
-
+while 1:
+    tyw = input('What tracker do  you want?')
+    for x in trackers.keys():
+        lel = path(trackers, str(x), tyw)
+        if lel != None : print(lel)
