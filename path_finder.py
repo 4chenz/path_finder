@@ -46,7 +46,7 @@ def path(graph, start, end):
                 continue
             print(n)
 while 1:
-    tyw = input('What tracker do  you want?')
+    tyw = input('What tracker do  you want?').lower()
     for x in trackers.keys():
         lel = path(trackers, str(x), tyw)
         if lel != None : print(lel)
